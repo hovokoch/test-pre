@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('order/create/{product_id}', 'OrderController@create')->name('order.create');
-Route::put('order/store/{product_id}', 'OrderController@store')->name('order.store');
+Route::group(['prefix' => 'order', 'middleware' => 'check_location'], function () {
+    Route::get('/create/{product_id}', 'OrderController@create')->name('order.create');
+    Route::put('/store/{product_id}', 'OrderController@store')->name('order.store');
+});
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //    return view('dashboard');
