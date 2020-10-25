@@ -16,7 +16,7 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->foreignId('order_id')->constrained('orders', 'id');
             $table->foreignId('product_id')->constrained('products', 'id');
-            $table->integer('quantity');
+            $table->integer('quantity')->default(1);
         });
     }
 

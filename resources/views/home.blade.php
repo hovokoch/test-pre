@@ -4,6 +4,16 @@
             <h1 class="text-6xl font-normal leading-normal mt-0 mb-2 text-gray-800">Products</h1>
         </div>
         <div class="flex flex-col">
+            @if(session()->has('message'))
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md"
+                     role="alert">
+                    <div class="flex">
+                        <div>
+                            <p class="font-bold">{{ session('message') }}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -35,7 +45,7 @@
                                         <img class="h-10 w-10 rounded-full" src="{{ $product->image_url }}" alt="">
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                        <a href="{{ url('home') }}"
+                                        <a href="{{ route('order.create', ['product_id' => $product->id]) }}"
                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">{{ __('Order') }}</a>
                                     </td>
                                 </tr>
